@@ -1,14 +1,12 @@
-name: Frontend CI
+name: Learning GitHub Actions
 
 on:
   push:
-    branches:
-      - main
-
+    
 jobs:
-  build:
+  test-job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: CI check
-        run: echo "CI is working"
+      - name: Say Hello
+        run: echo "Hello ,from  GitHub Actions!"
+
