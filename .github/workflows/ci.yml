@@ -1,18 +1,13 @@
-name: Learning GitHub Actions
+name: Frontend CI
 
 on:
   push:
-    
+  pull_request:
+
 jobs:
-  test-job:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Step 1 - Start
-        run: echo "CI Started"
-      - name: Step 2 - Run Tests
-        run: echo "Running Tests..."
-      - name: Step -3 starts
-        run: ls -la
-      - name: Step 3 - Finish
-        run: echo "CI Finished Successfully"
-
+      - uses: actions/checkout@v4
+      - name: CI check
+        run: echo "CI is working"
