@@ -1,17 +1,14 @@
-name: Learning GitHub Actions
+name: List Repository Files
 
 on:
   push:
-    
+
 jobs:
-  test-job:
+  list-files:
     runs-on: ubuntu-latest
     steps:
-      - name: Step 1 - Start
-        run: echo "CI Started"
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Step 2 - List Files
+      - name: List files in repo
         run: ls -la
-      - name: Step 3 - Finish
-        run: echo "CI Finished Successfully!"
-
