@@ -7,6 +7,11 @@ jobs:
   test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Say Hello
-        run: echo "Hello ,from  GitHub Actions!"
+      - name: Step 1 - Start
+        run: echo "CI Started"
+
+      - name: Step 2 - List Files
+        run: ls 
+      - name: Step 3 - Finish
+        run: echo "CI Finished Successfully!"
 
