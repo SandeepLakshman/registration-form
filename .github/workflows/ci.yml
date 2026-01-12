@@ -9,5 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: List Files
+        run: ls -al
       - name: CI check
         run: echo "CI is working"
+      - name: List Files
+        run: ls -al
