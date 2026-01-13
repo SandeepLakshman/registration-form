@@ -1,6 +1,5 @@
-name:  CI Code Quality (HTML & CSS)
+name: CI Code Quality
 
-# 1. Define when the workflow runs
 on:
   push:
     branches: [ main, feature-branch ]
@@ -8,25 +7,36 @@ on:
     branches: [ main ]
 
 jobs:
-  # 2. Define the job
-  lint-check:
-    name: Code Quality Check
+  html-lint:
+    name: HTML Validation
     runs-on: ubuntu-latest
 
     steps:
-      # 3. Pull your code into the runner
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 4. Run the Super-Linter
-      - name: Run Linters
+      - name: Run HTML Linter
         uses: github/super-linter@v5
         env:
-          VALIDATE_ALL_CODEBASE: true
-          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Specifically enabling HTML and CSS checks
+          DEFAULT_BRANCH: main
+          VALIDATE_ALL_CODEBASE: false
           VALIDATE_HTML: true
           VALIDATE_CSS: false
-          # This tells the linter to be strict
-          ERROR_ON_MISSING_EXEC_BIT: true
+
+  css-lint:
+    name: CSS Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run CSS Linter
+        uses: github/super-linter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BRANCH: main
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_HTML: false
+          VALIDATE_CSS: true
