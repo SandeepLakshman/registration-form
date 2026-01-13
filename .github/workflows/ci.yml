@@ -1,15 +1,32 @@
-name: Frontend CI
+name:  CI Code Quality (HTML & CSS)
 
+# 1. Define when the workflow runs
 on:
   push:
+    branches: [ main, feature-branch ]
   pull_request:
+    branches: [ main ]
 
 jobs:
-  build:
+  # 2. Define the job
+  lint-check:
+    name: Code Quality Check
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: List Files
-        run: ls  -al
-      - name: CI check
-        run: echo "CI check passed!"
+      # 3. Pull your code into the runner
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 4. Run the Super-Linter
+      - name: Run Linters
+        uses: github/super-linter@v5
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Specifically enabling HTML and CSS checks
+          VALIDATE_HTML: true
+          VALIDATE_CSS: true
+          # This tells the linter to be strict
+          ERROR_ON_MISSING_EXEC_BIT: true
