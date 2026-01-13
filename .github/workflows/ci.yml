@@ -1,15 +1,42 @@
-name: Frontend CI
+name: CI Code Quality
 
 on:
   push:
+    branches: [ main, feature-branch ]
   pull_request:
+    branches: [ main ]
 
 jobs:
-  build:
+  html-lint:
+    name: HTML Validation
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: List Files
-        run: ls  -al
-      - name: CI check
-        run: echo "CI check passed!"
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run HTML Linter
+        uses: github/super-linter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BRANCH: main
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_HTML: true
+          VALIDATE_CSS: false
+
+  css-lint:
+    name: CSS Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run CSS Linter
+        uses: github/super-linter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BRANCH: main
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_HTML: false
+          VALIDATE_CSS: true
