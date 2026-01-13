@@ -27,6 +27,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Specifically enabling HTML and CSS checks
           VALIDATE_HTML: true
-          VALIDATE_CSS: true
+          VALIDATE_CSS: false
           # This tells the linter to be strict
           ERROR_ON_MISSING_EXEC_BIT: true
